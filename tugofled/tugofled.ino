@@ -36,14 +36,14 @@ void loop() {
    if (((time2-millis())>debounceDelay)&& !digitalRead(4)){
      latch2=0;
    }
-   Serial.println(ledControlCurve(0,pos));
    analogWrite(3,ledControlCurve(-1020,pos));
    analogWrite(5,ledControlCurve(-510,pos));
    analogWrite(6,ledControlCurve(0,pos));
    analogWrite(9,ledControlCurve(510,pos));
    analogWrite(10,ledControlCurve(1020,pos));
-   Serial.println(pos);
-   
+   if (pos < -1020 || pos > 1020){
+     pos=0;
+   }
 }
 unsigned char ledControlCurve(int offset, int x){
   if ((x+offset)>255){
